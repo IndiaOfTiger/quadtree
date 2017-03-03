@@ -38,7 +38,8 @@ $(function () {
             var y = point.y / QT.tileSize - 0.5;
             var lat = 90 - 360 * Math.atan(Math.exp(y * 2 * Math.PI)) / Math.PI;
             var lng = 360 * x;
-            var NewLatlng = google.maps.LatLng(lat, lng);
+            var NewLatlng = new google.maps.LatLng(lat, lng);
+            console.log(NewLatlng);
             return NewLatlng;
         };
 
@@ -116,11 +117,13 @@ $(function () {
             var level = quad.length;
             var part = quad.substring(0, level);
             var bounds = new google.maps.LatLngBounds(QT.quadToLatLng(part));
+            console.log(QT.quadToLatLng(part));
             var SE = QT.nextDoor(quad, 1, 1).substring(0, level);
             bounds.extend(QT.quadToLatLng(SE));
             if (opts.visu){                // development aid
                 opts.visu.bounds = bounds;   // option like {visu:{map:map}} visualizes bounds on map
                 bounds.visu = new google.maps.Rectangle(opts.visu);
+                console.log(opts.visu);
             }
             return bounds;
         };
